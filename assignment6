@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .output-label {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        input {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style>
+    <title>String Manipulation</title>
+</head>
+<body>
+    <div class="container">
+        <label for="outputLabel">Output:</label>
+        <div id="outputLabel" class="output-label"></div>
+        <p id="charCount">Character Count: 0</p>
+        <input type="text" id="inputText" maxlength="1">
+        <button onclick="addCharacter()">Add Character</button>
+        <button onclick="deleteCharacter()">Delete Character</button>
+        <br>
+        <input type="text" id="searchText" placeholder="Search">
+        <button onclick="searchText()">Search</button>
+    </div>
+    <script>
+        function addCharacter() {
+            var outputLabel = document.getElementById("outputLabel");
+            var inputText = document.getElementById("inputText");
+
+            var newText = outputLabel.innerHTML + inputText.value;
+            outputLabel.innerHTML = newText;
+
+            // Clear the input field after adding character
+            inputText.value = "";
+
+            // Update character count
+            updateCharacterCount();
+        }
+
+        function deleteCharacter() {
+            var outputLabel = document.getElementById("outputLabel");
+
+            var currentText = outputLabel.innerHTML;
+            if (currentText.length > 0) {
+                var newText = currentText.slice(0, -1);
+                outputLabel.innerHTML = newText;
+
+                // Update character count
+                updateCharacterCount();
+            }
+        }
+
+        function updateCharacterCount() {
+            var outputLabel = document.getElementById("outputLabel");
+            var charCount = document.getElementById("charCount");
+
+            charCount.innerHTML = "Character Count: " + outputLabel.innerHTML.length;
+        }
+
+        function searchText() {
+            var outputLabel = document.getElementById("outputLabel");
+            var searchText = document.getElementById("searchText").value;
+
+            if (outputLabel.innerHTML.includes(searchText)) {
+                alert("Text found!");
+            } else {
+                alert("Text not found.");
+            }
+        }
+    </script>
+</body>
+</html>
